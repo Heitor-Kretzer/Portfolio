@@ -1,0 +1,52 @@
+create table app_onibus(
+  login_pk VARCHAR(100) not NULL,
+  senha INT not NULL,
+  ponto VARCHAR(100) not NULL, 
+  horario INT not NULL,
+  PRIMARY KEY(login_pk)
+  )
+  create table empresa(
+   nome_empresa VARCHAR(100) not NULL,
+   endereco VARCHAR(200) not NULL,
+   modelo_onibus INT not NULL,
+   cnpj_pk INT not NULL, 
+   login_app_fk VARCHAR(100) not NULL,
+   PRIMARY key(cnpj_pk),
+   FOREIGN key (login_app_fk) REFERENCES app_onibus(login_pk)
+    )
+create table ponto_onibus(
+    localizacao_pk VARCHAR(100) not NULL,
+    estado VARCHAR(30) not NULL,
+    estrutura VARCHAR(100) not NULL,
+    frequencia VARCHAR(100) not NULL,
+  	cnpj_empresa_fk INT not NULL,
+  	PRIMARY key(localizacao_pk),
+  	FOREIGN KEY (cnpj_empresa_fk) REFERENCES empresa(cnpj_pk)
+  )
+  create TABLE pessoas(
+    nome_completo VARCHAR(100) not NULL,
+    cpf_pk INT not NULL,
+    idade INT not NULL,
+    localizacao_ponto_onibus_fk VARCHAR(100) not NULL,
+    escolaridade VARCHAR(50) not NULL,
+    primary key(cpf_pk),
+    foreign key (localizacao_ponto_onibus_fk) references ponto_onibus(localizacao_pk)
+    )  
+    
+    
+    INSERT INTO app_onibus(login_pk, senha, ponto, horario)
+    VALUES('heitor', 2007, 'mais proximo', 14:40)
+    
+    insert INTO empresa(nome_empresa, endereco, modelo_onibus, cnpj_pk, login_app_fk)
+    VALUES('jotur', 'Av. Elza Lucchi, 1569', 'mercedes', 04.135.085/0001-76, 'hector')
+    
+    insert into ponto_onibus(localizacao_pk, estado, estrutura, frequencia, cnpj_empresa_fk)
+    VALUES('rua manoel porto filho', 'quebrado', 'concreto', 'pouca gente', 57.522.128/0001-321)
+    
+    insert into pessoas(nome_completo, cpf_pk, idade, localizacao_ponto_onibus_fk, escolaridade)
+    VALUES('heitor kretzer', 587.414.020-49, 16, 'rua 25 de dezembro', '2º ano do médio')
+    
+    SELECT * FROM app_onibus
+    SELECT * FROM empresa
+    SELECT * FROM ponto_onibus
+    SELECT * FROM pessoas
